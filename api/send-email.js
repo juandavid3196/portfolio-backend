@@ -1,15 +1,18 @@
 // api/send-email.js
 
 import nodemailer from 'nodemailer';
-import cors from 'cors'; // Importa el paquete cors
-
-app.use(cors({
-    origin: 'http://localhost:4200', // Permitir solicitudes desde esta URL
-    methods: ['GET', 'POST'], // Métodos permitidos
-    allowedHeaders: ['Content-Type'], // Cabeceras permitidas
-}));
 
 export default async function handler(req, res) {
+    // Configuración de CORS
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); // Permitir solicitudes desde esta URL
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Métodos permitidos
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Cabeceras permitidas
+
+    // Manejo de la solicitud OPTIONS
+    if (req.method === 'OPTIONS') {
+        return res.status(200).end(); // Respuesta vacía para solicitudes OPTIONS
+    }
+
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Método no permitido' });
     }
@@ -27,7 +30,7 @@ export default async function handler(req, res) {
 
     const mailOptions = {
         from: email,
-        to: process.env.EMAIL_LOCAL, 
+        to: process.env.EMAIL_LOCAL,
         subject: `Nuevo mensaje de ${name}`,
         text: message,
     };
@@ -39,5 +42,4 @@ export default async function handler(req, res) {
         console.error('Error al enviar el email:', error);
         return res.status(500).json({ message: 'Error al enviar el email', error });
     }
-    
 }
