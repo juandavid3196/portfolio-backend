@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         from: email,
         to: process.env.EMAIL_LOCAL,
         subject: `Nuevo mensaje de ${name}`,
-        text: message,
+        text: `email: ${email} - message: ${message}`,
     };
 
     try {
