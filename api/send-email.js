@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
     // Configuración de CORS
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200'); // Permitir solicitudes desde esta URL
+    res.setHeader('Access-Control-Allow-Origin', 'https://jdrr-portfolio.vercel.app'); // Permitir solicitudes desde esta URL
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS'); // Métodos permitidos
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // Cabeceras permitidas
 
