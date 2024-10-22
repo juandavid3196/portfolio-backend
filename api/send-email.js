@@ -1,6 +1,13 @@
 // api/send-email.js
 
 import nodemailer from 'nodemailer';
+import cors from 'cors'; // Importa el paquete cors
+
+app.use(cors({
+    origin: 'http://localhost:4200', // Permitir solicitudes desde esta URL
+    methods: ['GET', 'POST'], // Métodos permitidos
+    allowedHeaders: ['Content-Type'], // Cabeceras permitidas
+}));
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
